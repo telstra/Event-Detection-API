@@ -1,0 +1,370 @@
+﻿swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Telstra Event Detection API
+  description: Telstra’s Event Detection API provides an interface where one can subscribe for SIM swap events along with roaming location updates for opted-in subscribers. For the beta release only the SIM swap feature is available. Changes in the identity attributes are detected and analyzed for legitimacy. All illegitimate instances are notified and recorded in the system.
+  license:
+    name: MIT
+    url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
+host: default
+basePath: /v1/eventdetection
+securityDefinitions:
+  auth:
+    type: oauth2
+    flow: application
+    tokenUrl: 'https://beta-tapi.telstra.com/v2/oauth/token'
+    scopes:
+      v1_eventdetection_simswap: v1_eventdetection_simswap
+      v1_eventdetection_location: v1_eventdetection_location
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /events:
+    post:
+      description: Register for an event
+      summary: Register
+      tags:
+        - Registration
+      operationId: Register
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: Subscribe with a list of phone numbers, push notification URL and the event type. Event Type can be simswap or location-change.
+          schema:
+            $ref: '#/definitions/SubscriptionObj'
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: oAuth token
+      responses:
+        '200':
+          description: return a list of phone numbers with Telstra
+          schema:
+            $ref: '#/definitions/PhoneNumberList'
+          examples: {}
+        '204':
+          description: No Content
+          schema: {}
+        '400':
+          description: Invalid format of request
+          schema: {}
+        '401':
+          description: Unauthorised
+          schema: {}
+        '403':
+          description: Forbidden
+          schema: {}
+        '404':
+          description: Resource Not Found
+          schema: {}
+        '409':
+          description: Conflict
+          schema: {}
+        '503':
+          description: The service requested is currently unavailable
+          schema: {}
+      security:
+        - auth:
+            - v1_eventdetection_simswap
+            - v1_eventdetection_location
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/events/subscriptions/{eventType}':
+    post:
+      description: Get Subscription Details for an event
+      summary: Get Subscription
+      tags:
+        - GetSubscription
+      operationId: GetSubscription
+      produces:
+        - application/json
+      parameters:
+        - name: eventType
+          in: path
+          required: true
+          type: string
+          description: Event type. Value can be simswap or location-change 
+          enum:
+            - simswap
+            - location-change
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: oAuth token
+        - name: body
+          in: body
+          required: true
+          description: List of subscribed phone numbers
+          schema:
+            $ref: '#/definitions/PhoneNumberList'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/GetSubscriptionResponse'
+          examples: {}
+        '204':
+          description: No Content
+          schema: {}
+        '400':
+          description: Invalid format of request
+          schema: {}
+        '401':
+          description: Unauthorised
+          schema: {}
+        '403':
+          description: Forbidden
+          schema: {}
+        '404':
+          description: Resource not found
+          schema: {}
+        '503':
+          description: The service requested is currently unavailable
+          schema: {}
+      security:
+        - auth:
+            - v1_eventdetection_simswap
+            - v1_eventdetection_location
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/events/{eventType}':
+    post:
+      description: Event long polling
+      summary: Longpoll
+      tags:
+        - LongPoll
+      operationId: Longpoll
+      produces:
+        - application/json
+      parameters:
+        - name: eventType
+          in: path
+          required: true
+          type: string
+          description: Event Type. Value can be simswap or location-change
+          enum:
+            - simswap
+            - location-change
+        - name: since
+          in: query
+          required: false
+          type: string
+          description: Date to specify the start of events. Value of since parameter should be given current date minus 90 days
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: oAuth token
+        - name: body
+          in: body
+          required: true
+          description: List of phone numbers on which polling has to be performed
+          schema:
+            $ref: '#/definitions/PollingObj'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/GetEventResponse'
+          examples: {}
+        '204':
+          description: No Content
+          schema: {}
+        '400':
+          description: Invalid format of request
+          schema: {}
+        '401':
+          description: Unauthorised
+          schema: {}
+        '403':
+          description: Forbidden
+          schema: {}
+        '404':
+          description: Resource not found
+          schema: {}
+        '503':
+          description: The service requested is currently unavailable
+          schema: {}
+      security:
+        - auth: []
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: Unregister from an event
+      summary: Unregister
+      tags:
+        - Registration
+      operationId: Unregister
+      produces:
+        - application/json
+      parameters:
+        - name: eventType
+          in: path
+          required: true
+          type: string
+          description: Event Type. Value can be simswap or location-change 
+          enum:
+            - simswap
+            - location-change
+        - name: body
+          in: body
+          required: true
+          description: List of subscribed phone numbers
+          schema:
+            $ref: '#/definitions/PhoneNumberList'
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: oAuth token
+      responses:
+        '200':
+          description: return a list of phone numbers opted out successfully
+          schema:
+            $ref: '#/definitions/PhoneNumberList'
+          examples: {}
+        '400':
+          description: Invalid format of request
+          schema: {}
+        '401':
+          description: Unauthorised
+          schema: {}
+        '403':
+          description: Forbidden
+          schema: {}
+        '404':
+          description: Resource not found
+          schema: {}
+        '503':
+          description: The service requested is currently unavailable
+          schema: {}
+      security:
+        - auth:
+            - v1_eventdetection_simswap
+            - v1_eventdetection_location
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  PhoneNumberList:
+    title: PhoneNumberList
+    type: object
+    properties:
+      phoneNumbers:
+        description: ''
+        type: array
+        items:
+          type: string
+  PollingObj:
+    title: PollingObj
+    type: object
+    properties:
+      phoneNumbers:
+        description: ''
+        type: array
+        items:
+          type: string
+    required:
+      - phoneNumbers
+  SubscriptionObj:
+    title: SubscriptionObj
+    type: object
+    properties:
+      phoneNumbers:
+        description: ''
+        type: array
+        items:
+          type: string
+      pushUrl:
+        description: ''
+        type: string
+      eventType:
+        description: ''
+        type: string
+    required:
+      - phoneNumbers
+      - eventType
+  Eventsattr:
+    title: Eventsattrvalue
+    type: object
+    properties:
+      phoneNumber:
+        description: Phone number
+        type: string
+      events:
+        description: Array of event attributes
+        type: array
+        items:
+            type: string
+    required:
+      - phoneNumber
+      - events
+  Subscriptionattr:
+    title: Subscriptionattrvalue
+    type: object
+    properties:
+      phoneNumber:
+        description: Phone number
+        type: string
+      timestamp:
+        description: Timestamp that represents the time when the subscriber opted in for the service
+        type: string
+    required:
+      - phoneNumber
+      - timestamp
+  GetEventResponse:
+    title: GetEventResponse
+    description: This is the interface to get event details for a phone number. The number must be a registered number. The response depends on the type of event.
+    type: object
+    properties:
+      eventname:
+        description: Name of the event
+        type: string
+      phoneNumbers:
+        description: Array containing the object with evnt attributes
+        type: array
+        items:
+          $ref: '#/definitions/Eventsattr'
+    required:
+      - eventname
+      - phoneNumbers
+  GetSubscriptionResponse:
+    title: GetSubscriptionResponse
+    description: This is the interface to get subscription details for a phone number. The number must be a registered number. The response depends on the type of event..
+    type: object
+    properties:
+      eventname:
+        description: Name of the event
+        type: string
+      subscriptions:
+        description: Array containing the object with values for phone number and subscription attributes
+        type: array
+        items:
+          $ref: '#/definitions/Subscriptionattr'
+    required:
+      - eventname
+      - subscriptions
