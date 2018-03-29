@@ -1,0 +1,11 @@
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "EventDetectionAPI-SDK-ruby",
+  "gemName": "Telstra_EventDetection",
+  "moduleName": "Telstra_EventDetection",
+  "gemVersion": "1.0.0",
+  "gemAuthor": "Telstra",
+  "gemHomepage": "https://dev.telstra.com",
+  "gemLicense": "Apache2",
+  "generatorClass": "telstra"
+}

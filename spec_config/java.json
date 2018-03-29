@@ -1,0 +1,10 @@
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "EventDetectionAPI-SDK-java",
+  "packageVersion": "1.0.0",
+  "groupId": "Telstra", 
+  "artifactId": "Telstra_EventDetection",
+  "apiPackage": "com.telstra.eventdetection",
+  "modelPackage": "com.telstra.eventdetection"
+}
+

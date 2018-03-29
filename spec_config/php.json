@@ -1,0 +1,7 @@
+{
+  "gitUserId": "Telstra",
+  "gitRepoId": "EventDetectionAPI-SDK-php",
+  "invokerPackage": "Telstra_EventDetection",
+  "artifactVersion": "1.0.0",
+  "composerProjectName": "Telstra_EventDetection"
+}
