@@ -14,7 +14,7 @@ info:
     Event Detection API provides these features
       | Feature              | Description |
       |---|---|
-      |`SIM swap` | Returns timestamped event data when any of the following network events occurs in connection with a registered mobile number associated with Telstraâ€™s mobile network:  SIM swap, port-in, port-out, new MSISDN, new mobile service or cancelled mobile service |
+      |`SIM swap` | Returns timestamped event data when any of the following network events occurs in connection with a registered mobile number associated with Telstra’s mobile network:  SIM swap, port-in, port-out, new MSISDN, new mobile service or cancelled mobile service |
       |`Carrier Detection` | Find out what Australian carrier a mobile number is subscribed to |
       |`International Roaming` | *Coming soon.* Will indicate if a mobile number is operaing in Australia or outside of Australia. |
 
@@ -27,7 +27,7 @@ info:
 
     **Q: What is the Telstra Event Detection (TED) API?**
 
-    A: The Telstra Event Detection (TED) API is a subscription based service from Telstra that enables a customer to be alerted when a particular network event is detected in connection with a registered mobile number that may indicate that a fraudulent misuse of an end userâ€™s mobility service is about to occur.
+    A: The Telstra Event Detection (TED) API is a subscription based service from Telstra that enables a customer to be alerted when a particular network event is detected in connection with a registered mobile number that may indicate that a fraudulent misuse of an end user’s mobility service is about to occur.
 
 
     **Q: What are the network events that the TED API can detect?**
@@ -37,7 +37,7 @@ info:
 
     **Q: Can TED API detect number porting between operators other than Telstra? E.g. Optus to Vodafone?**
 
-    A: No, we donâ€™t report these type of events at present.
+    A: No, we don’t report these type of events at present.
 
 
     **Q: How quickly are the network events detected?**
@@ -57,7 +57,7 @@ info:
 
     **Q: Why is monitoring for SIM SWAP events important?**
 
-    A: Criminals are becoming much more savvy and will often try to circumvent two factor authentication protocols by swapping the SIM card for a particular mobile number in order to gain fraudulent access to the end userâ€™s service. Monitoring for SIM swap events may provide early detection that this is occurring and help prevent criminals from being successful in their endeavours.
+    A: Criminals are becoming much more savvy and will often try to circumvent two factor authentication protocols by swapping the SIM card for a particular mobile number in order to gain fraudulent access to the end user’s service. Monitoring for SIM swap events may provide early detection that this is occurring and help prevent criminals from being successful in their endeavours.
 
 
     **Q: If an end user is currently a customer of a Telstra Reseller that still utilises the Telstra Network, am I able to detect their Network events?**
@@ -100,16 +100,16 @@ info:
     A: There is a month-by-month Pay As You Go (PAYG) plan or 12 Month contract option available.
 
 
-    **Q: Do Early Termination Charges (ETCâ€™s) apply?**
+    **Q: Do Early Termination Charges (ETC’s) apply?**
 
     A: If you have subscribed to a 12 month contract and want to terminate the plan or downgrade to a lower plan before the expiry of your existing 12 month term, we may charge you ETCs.
 
 
     **Q: What privacy requirements apply to my use of the Telstra Event Detection API?**
 
-    A: Before registering an end userâ€™s mobile number with Telstra Event Detection API, you must:
+    A: Before registering an end user’s mobile number with Telstra Event Detection API, you must:
 
-    1.  prepare an â€œEnd User Notificationâ€ for our approval, which sets out what end user information will be disclosed via the API, the purposes for which that information will be disclosed, and to which third parties that information will be disclosed;
+    1.  prepare an “End User Notification” for our approval, which sets out what end user information will be disclosed via the API, the purposes for which that information will be disclosed, and to which third parties that information will be disclosed;
 
     2.  provide each of your end user with the End User Notification; and
 
@@ -118,7 +118,7 @@ info:
 
     **Q: What terms and conditions apply to my use of the Telstra Event Detection API?**
 
-    A: Before using the Telstra Event Detection API, you must agree to the TED API [â€œOur Customer Termsâ€](https://www.telstra.com.au/customer-terms/business-government#cloud-services).
+    A: Before using the Telstra Event Detection API, you must agree to the TED API [“Our Customer Terms”](https://www.telstra.com.au/customer-terms/business-government#cloud-services).
 
 
 
@@ -159,7 +159,7 @@ info:
 
     ## Subscribe mobile numbers
 
-    Subscribing end user mobile numbers informs the API to register that mobile number so that you can poll those numbers for particular events. You can subscribe and unsubscribe numbers (opt in and opt out) against this service. Only numbers that are opted in (i.e. subscribed) can be polled for events. You must have obtained your end customerâ€™s consent before you can opt them into the Event Detection service.
+    Subscribing end user mobile numbers informs the API to register that mobile number so that you can poll those numbers for particular events. You can subscribe and unsubscribe numbers (opt in and opt out) against this service. Only numbers that are opted in (i.e. subscribed) can be polled for events. You must have obtained your end customer’s consent before you can opt them into the Event Detection service.
 
 
     # Request
